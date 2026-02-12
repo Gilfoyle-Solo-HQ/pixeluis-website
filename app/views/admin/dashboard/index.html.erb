@@ -1,0 +1,60 @@
+<% content_for(:page_title) { "Dashboard" } %>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+  <div class="bg-white border border-gray-200 rounded-xl p-6">
+    <p class="text-sm text-gray-500 mb-1">Published Posts</p>
+    <p class="text-3xl font-bold text-gray-900"><%= @published_post_count %></p>
+    <p class="text-xs text-gray-400 mt-1"><%= @post_count %> total</p>
+  </div>
+  <div class="bg-white border border-gray-200 rounded-xl p-6">
+    <p class="text-sm text-gray-500 mb-1">Podcast Episodes</p>
+    <p class="text-3xl font-bold text-gray-900"><%= @episode_count %></p>
+  </div>
+  <div class="bg-white border border-gray-200 rounded-xl p-6">
+    <p class="text-sm text-gray-500 mb-1">Confirmed Bookings</p>
+    <p class="text-3xl font-bold text-gray-900"><%= @booking_count %></p>
+  </div>
+  <div class="bg-white border border-gray-200 rounded-xl p-6">
+    <p class="text-sm text-gray-500 mb-1">Quick Actions</p>
+    <div class="flex flex-col gap-2 mt-2">
+      <%= link_to "New Post", new_admin_post_path, class: "text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
+      <%= link_to "New Episode", new_admin_podcast_episode_path, class: "text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
+    </div>
+  </div>
+</div>
+
+<div class="bg-white border border-gray-200 rounded-xl">
+  <div class="px-6 py-4 border-b border-gray-200">
+    <h3 class="font-semibold text-gray-900">Recent Bookings</h3>
+  </div>
+  <% if @recent_bookings.any? %>
+    <table class="w-full">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Name</th>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Email</th>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Topic</th>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Status</th>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Date</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <% @recent_bookings.each do |booking| %>
+          <tr>
+            <td class="px-6 py-4 text-sm text-gray-900"><%= booking.name %></td>
+            <td class="px-6 py-4 text-sm text-gray-500"><%= booking.email %></td>
+            <td class="px-6 py-4 text-sm text-gray-500"><%= booking.consultation_topic.name %></td>
+            <td class="px-6 py-4">
+              <span class="inline-flex px-2 py-1 text-xs font-medium rounded-full <%= booking.status == 'confirmed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' %>">
+                <%= booking.status.capitalize %>
+              </span>
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-500"><%= booking.created_at.strftime("%b %d, %Y") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="px-6 py-8 text-center text-gray-500 text-sm">No bookings yet.</div>
+  <% end %>
+</div>

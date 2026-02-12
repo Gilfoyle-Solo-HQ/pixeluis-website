@@ -1,0 +1,41 @@
+<% content_for(:page_title) { "Blog Posts" } %>
+
+<div class="flex justify-between items-center mb-6">
+  <p class="text-sm text-gray-500"><%= @posts.count %> posts</p>
+  <%= link_to "New Post", new_admin_post_path, class: "px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors" %>
+</div>
+
+<div class="bg-white border border-gray-200 rounded-xl">
+  <% if @posts.any? %>
+    <table class="w-full">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Title</th>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Status</th>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Published</th>
+          <th class="text-right px-6 py-3 text-xs font-medium text-gray-500 uppercase">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <% @posts.each do |post| %>
+          <tr>
+            <td class="px-6 py-4">
+              <%= link_to post.title, admin_post_path(post), class: "text-sm font-medium text-gray-900 hover:text-indigo-600" %>
+            </td>
+            <td class="px-6 py-4">
+              <span class="inline-flex px-2 py-1 text-xs font-medium rounded-full <%= post.published? ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600' %>">
+                <%= post.published? ? 'Published' : 'Draft' %>
+              </span>
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-500"><%= post.published_at&.strftime("%b %d, %Y") || "—" %></td>
+            <td class="px-6 py-4 text-right">
+              <%= link_to "Edit", edit_admin_post_path(post), class: "text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="px-6 py-8 text-center text-gray-500 text-sm">No posts yet. Create your first one!</div>
+  <% end %>
+</div>

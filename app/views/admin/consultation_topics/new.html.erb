@@ -1,0 +1,7 @@
+<% content_for(:page_title) { "New Topic" } %>
+<div class="mb-6">
+  <%= link_to "← All Topics", admin_consultation_topics_path, class: "text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
+</div>
+<div class="bg-white border border-gray-200 rounded-xl p-8">
+  <%= render "form", topic: @topic %>
+</div>

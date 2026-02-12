@@ -1,0 +1,9 @@
+<% content_for(:page_title) { "New Post" } %>
+
+<div class="mb-6">
+  <%= link_to "← All Posts", admin_posts_path, class: "text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
+</div>
+
+<div class="bg-white border border-gray-200 rounded-xl p-8">
+  <%= render "form", post: @post %>
+</div>

@@ -1,0 +1,39 @@
+<% content_for(:title) { "Choose a Time - #{@topic.name}" } %>
+
+<section class="py-16">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-8">
+      <%= link_to "← Back to Topics", book_topics_path, class: "text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
+      <h1 class="text-3xl font-bold text-gray-900 mt-4">Select a Time</h1>
+      <p class="text-gray-600 mt-2">
+        <strong><%= @topic.name %></strong> &middot; <%= @topic.formatted_price %> &middot; <%= @topic.duration_minutes %> minutes
+      </p>
+    </div>
+
+    <% if @time_slots.any? %>
+      <div class="space-y-3">
+        <% @time_slots.each do |slot| %>
+          <div class="bg-white border border-gray-200 rounded-xl p-4 hover:border-indigo-300 transition-colors">
+            <%= form_with url: book_checkout_path, method: :post, class: "flex items-center justify-between" do |f| %>
+              <%= f.hidden_field :consultation_topic_id, value: @topic.id %>
+              <%= f.hidden_field :time_slot_id, value: slot.id %>
+              <div>
+                <p class="font-medium text-gray-900"><%= slot.formatted_time %></p>
+                <p class="text-sm text-gray-500"><%= slot.starts_at.strftime("%l:%M %p") %> - <%= slot.ends_at.strftime("%l:%M %p %Z") %></p>
+              </div>
+              <div class="flex items-center gap-3">
+                <%= f.text_field :name, placeholder: "Your name", required: true, class: "border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" %>
+                <%= f.email_field :email, placeholder: "your@email.com", required: true, class: "border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" %>
+                <%= f.submit "Book & Pay", class: "px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors cursor-pointer" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-center py-12 bg-gray-50 rounded-xl">
+        <p class="text-gray-500">No available time slots for this topic. Please check back later.</p>
+      </div>
+    <% end %>
+  </div>
+</section>

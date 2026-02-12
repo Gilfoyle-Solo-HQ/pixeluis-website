@@ -1,0 +1,70 @@
+<% content_for(:title) { "Home" } %>
+
+<!-- Hero -->
+<section class="bg-gradient-to-br from-indigo-50 to-white py-24">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="text-5xl font-bold text-gray-900 mb-6">
+      Welcome to Your Brand
+    </h1>
+    <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+      A tagline that captures your mission. Help your audience understand what you do and why it matters.
+    </p>
+    <%= link_to "Book a Consultation", book_path, class: "inline-flex items-center px-8 py-3 bg-indigo-600 text-white text-lg font-medium rounded-lg hover:bg-indigo-700 transition-colors" %>
+  </div>
+</section>
+
+<!-- About -->
+<section class="py-16">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">About Me</h2>
+        <p class="text-gray-600 mb-4">
+          Share your story here. Talk about your background, expertise, and what drives you. This is where visitors connect with you on a personal level.
+        </p>
+        <p class="text-gray-600">
+          Mention your qualifications, experience, and the transformation you help your clients achieve.
+        </p>
+      </div>
+      <div class="bg-gray-200 rounded-2xl h-80 flex items-center justify-center text-gray-400">
+        Photo placeholder
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What I Offer -->
+<section class="bg-gray-50 py-16">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold text-gray-900 mb-12">What I Offer</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white p-6 rounded-xl shadow-sm">
+        <div class="text-3xl mb-4">🎙️</div>
+        <h3 class="font-semibold text-lg mb-2">Podcast</h3>
+        <p class="text-gray-600 text-sm">Listen to conversations about topics that matter.</p>
+        <%= link_to "Listen Now →", podcasts_path, class: "text-indigo-600 text-sm font-medium mt-3 inline-block hover:text-indigo-700" %>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-sm">
+        <div class="text-3xl mb-4">✍️</div>
+        <h3 class="font-semibold text-lg mb-2">Blog</h3>
+        <p class="text-gray-600 text-sm">Read insights and practical advice on your journey.</p>
+        <%= link_to "Read More →", blog_path, class: "text-indigo-600 text-sm font-medium mt-3 inline-block hover:text-indigo-700" %>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow-sm">
+        <div class="text-3xl mb-4">📅</div>
+        <h3 class="font-semibold text-lg mb-2">Consultations</h3>
+        <p class="text-gray-600 text-sm">Book a 1-on-1 session to get personalized guidance.</p>
+        <%= link_to "Book Now →", book_path, class: "text-indigo-600 text-sm font-medium mt-3 inline-block hover:text-indigo-700" %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Email Capture -->
+<section class="py-16">
+  <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold text-gray-900 mb-4">Stay in the Loop</h2>
+    <p class="text-gray-600 mb-8">Join the newsletter for exclusive insights, new episodes, and updates.</p>
+    <%= render "shared/email_capture" %>
+  </div>
+</section>

@@ -1,0 +1,20 @@
+<div data-controller="email-capture">
+  <form data-email-capture-target="form" data-action="submit->email-capture#submit" class="flex gap-3 max-w-md mx-auto">
+    <input
+      type="email"
+      name="email_address"
+      data-email-capture-target="email"
+      placeholder="you@example.com"
+      required
+      class="flex-1 border border-gray-300 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+    >
+    <button
+      type="submit"
+      data-email-capture-target="button"
+      class="px-6 py-3 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
+    >
+      Subscribe
+    </button>
+  </form>
+  <p data-email-capture-target="message" class="text-sm text-green-600 mt-3 hidden">Thanks for subscribing!</p>
+</div>

@@ -1,0 +1,38 @@
+<% content_for(:page_title) { "Bookings" } %>
+
+<div class="bg-white border border-gray-200 rounded-xl">
+  <% if @bookings.any? %>
+    <table class="w-full">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Name</th>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Email</th>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Topic</th>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Time</th>
+          <th class="text-left px-6 py-3 text-xs font-medium text-gray-500 uppercase">Status</th>
+          <th class="text-right px-6 py-3 text-xs font-medium text-gray-500 uppercase">Details</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <% @bookings.each do |booking| %>
+          <tr>
+            <td class="px-6 py-4 text-sm text-gray-900"><%= booking.name %></td>
+            <td class="px-6 py-4 text-sm text-gray-500"><%= booking.email %></td>
+            <td class="px-6 py-4 text-sm text-gray-500"><%= booking.consultation_topic.name %></td>
+            <td class="px-6 py-4 text-sm text-gray-500"><%= booking.time_slot.formatted_time %></td>
+            <td class="px-6 py-4">
+              <span class="inline-flex px-2 py-1 text-xs font-medium rounded-full <%= booking.status == 'confirmed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' %>">
+                <%= booking.status.capitalize %>
+              </span>
+            </td>
+            <td class="px-6 py-4 text-right">
+              <%= link_to "View", admin_booking_path(booking), class: "text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="px-6 py-8 text-center text-gray-500 text-sm">No bookings yet.</div>
+  <% end %>
+</div>

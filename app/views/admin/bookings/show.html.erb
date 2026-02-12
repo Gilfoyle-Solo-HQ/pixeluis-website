@@ -1,0 +1,48 @@
+<% content_for(:page_title) { "Booking ##{@booking.id}" } %>
+
+<div class="mb-6">
+  <%= link_to "← All Bookings", admin_bookings_path, class: "text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
+</div>
+
+<div class="bg-white border border-gray-200 rounded-xl p-8">
+  <div class="grid grid-cols-2 gap-6">
+    <div>
+      <p class="text-sm text-gray-500">Name</p>
+      <p class="font-medium"><%= @booking.name %></p>
+    </div>
+    <div>
+      <p class="text-sm text-gray-500">Email</p>
+      <p class="font-medium"><%= @booking.email %></p>
+    </div>
+    <div>
+      <p class="text-sm text-gray-500">Topic</p>
+      <p class="font-medium"><%= @booking.consultation_topic.name %></p>
+    </div>
+    <div>
+      <p class="text-sm text-gray-500">Time</p>
+      <p class="font-medium"><%= @booking.time_slot.formatted_time %></p>
+    </div>
+    <div>
+      <p class="text-sm text-gray-500">Status</p>
+      <span class="inline-flex px-2 py-1 text-xs font-medium rounded-full <%= @booking.status == 'confirmed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' %>">
+        <%= @booking.status.capitalize %>
+      </span>
+    </div>
+    <div>
+      <p class="text-sm text-gray-500">Booked At</p>
+      <p class="font-medium"><%= @booking.created_at.strftime("%B %d, %Y at %l:%M %p") %></p>
+    </div>
+    <% if @booking.polar_checkout_id.present? %>
+      <div>
+        <p class="text-sm text-gray-500">Polar Checkout ID</p>
+        <p class="font-medium text-xs font-mono"><%= @booking.polar_checkout_id %></p>
+      </div>
+    <% end %>
+    <% if @booking.polar_order_id.present? %>
+      <div>
+        <p class="text-sm text-gray-500">Polar Order ID</p>
+        <p class="font-medium text-xs font-mono"><%= @booking.polar_order_id %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
